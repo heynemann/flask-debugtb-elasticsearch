@@ -12,7 +12,7 @@
 import json
 import jinja2
 from flask_debugtoolbar.panels import DebugPanel
-from flask_debugtoolbar_elasticSearch.utils import ThreadCollector
+from flask_debugtb_elasticsearch.utils import ThreadCollector
 
 from elasticsearch.connection.base import Connection
 
