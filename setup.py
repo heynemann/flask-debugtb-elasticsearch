@@ -49,8 +49,9 @@ Flask debug toolbar panel for elasticsearch queries.
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        # add your dependencies here
-        # remember to use 'package-name>=x.y.z,<x.y+1.0' notation (this way you get bugfixes)
+        'Flask>=0.8',
+        'elasticsearch',
+        'Flask-DebugToolbar',
     ],
     extras_require={
         'tests': tests_require,
