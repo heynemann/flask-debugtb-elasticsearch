@@ -1,0 +1,65 @@
+{% if records %}
+<script type="text/javascript">
+       var uarr = String.fromCharCode(0x25b6),
+            darr = String.fromCharCode(0x25bc);
+
+        $('a.elasticShowTemplate').click(function() {
+            $(this).next().toggle();
+            var arrow = $(this).children('.toggleArrow');
+            arrow.html(arrow.html() == uarr ? darr : uarr);
+            textarea = $(this).parent().next();
+            textarea.toggle();
+            return false;
+        });
+
+        $('.selectText').click(function() {
+            $(this).parent().next().find('code').focus();
+        });
+
+        $('code.json_code').focus(function() {
+            document.execCommand('selectAll', false, null);
+        });
+
+</script>
+    <dl>
+    {% for record in records %}
+        <dt>
+        {{index}} {{ record.method }} {{record.status_code}} {{record.path}}
+        </dt>
+        <dd>time: {{record.duration}} ms</dd>
+        <dd>full_url: {{record.full_url}}</dd>
+        <dd>
+            <div class="djTemplateShowContextDiv">
+                <a class="elasticShowTemplate">
+                    <span class="toggleArrow">▶</span> Show Json Body
+                </a>
+                <a class="selectText" style="display: none;"> -&gt; (Select All Json for ctrl + c)</a>
+            </div>
+            <div class="djTemplateHideContextDiv" style="display: none;">
+                <code class="json_code" contenteditable="true" >{{record.body}}</code>
+            </div>
+        </dd>
+        <dd>
+            <div class="djTemplateShowContextDiv">
+                <a class="elasticShowTemplate">
+                    <span class="toggleArrow">▶</span> Show Json Response
+                </a>
+                <a class="selectText" style="display: none;"> -&gt; (Select All Json for ctrl + c)</a>
+            </div>
+            <div class="djTemplateHideContextDiv" style="display: none;">
+                <code class="json_code" contenteditable="true" >{{record.response}}</code>
+            </div>
+        </dd>
+        </dt>
+    {% endfor %}
+    </dl>
+{% else %}
+    {% if debug %}
+        <p>No Elastic queries were recorded during this request.</p>
+    {% else %}
+        <p style="padding: 10px 15px;">
+            <code style="display: inline;">DEBUG</code> is set to <code style="display: inline;">False</code>. This means
+            that Elastic query logging is disabled.
+        </p>
+    {% endif %}
+{% endif %}

@@ -1,0 +1,5 @@
+prune dist
+prune build
+prune tests
+recursive-include flask_debugtb_elasticsearch *.py
+recursive-include flask_debugtb_elasticsearch *.html
