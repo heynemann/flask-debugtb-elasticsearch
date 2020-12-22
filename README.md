@@ -14,6 +14,11 @@ and packaged it properly to use in pypi.
 Just include in your panels:
 
     app.config['DEBUG_TB_PANELS'].append('flask_debugtb_elasticsearch.panel.ElasticsearchDebugPanel')
+    
+Or:
+
+    app.config["DEBUG_TB_PANELS"] = list(app.config["DEBUG_TB_PANELS"])
+    app.config["DEBUG_TB_PANELS"].append('flask_debugtb_elasticsearch.panel.ElasticsearchDebugPanel')
 
 And that's all there is to it.
 
